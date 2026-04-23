@@ -1,0 +1,16 @@
+<!--PLANTILLA PARA AVISAR QUE UN ESTUDIANTE NO ESTÁ ASIGNADO A UNA MATERIA-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AVISO</title>
+</head>
+<body>
+    <h1>AVISO...</h1>
+    <p>El estudiante con usuario {{usuario}} no está registrado a la materia de {{materia}}.</p>
+    <br>
+    <a href="{{ url_for('show_set_grades') }}" >
+        <button>Volver</button>
+    </a>
+</body>
+</html>
