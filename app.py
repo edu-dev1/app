@@ -293,9 +293,7 @@ def show_regs_subjects() -> str:
     teachers_subjects = teacher.get_subjects()
     all_subjects = db.get_data(table="subjects", columns=["name"])
 
-    return render_template("reg_subjects.html", # esta plantilla .html las necesita.
-                           materias_maestro = teachers_subjects,
-                           materias = all_subjects)
+    return render_template("reg_subjects.html", materias_maestro = teachers_subjects, materias = all_subjects)# esta plantilla .html las necesita.
 
 # Esta función muestra la página de poner calificaciones a sus estudiantes
 @app.route('/set_grades', methods = ["GET", "POST"])
@@ -319,8 +317,11 @@ def show_set_grades() -> str:
         subject = Subject(subject_name, db)
         # Obtiene la calificación de tipo float
         grade = request.form.get("calificación", type=float)    
-        # Pone la calificación de la materia del estudiante creados anteriormene
-        teacher.set_grade(grade, subject, student)
+        
+        if student.assigned_subject_yet(subject): # Si el estudiante está registrado en la materia...
+            teacher.set_grade(grade, subject, student) #... pone la calificación
+        else: # Si no está registrado en la materia muestra una página de aviso.
+            return render_template("error_grades.html", usuario = student.get_user_name(), materia = subject_name)
 
         return redirect(url_for("show_set_grades")) # Redirige a esta misma función para que muestre otra vez la página
     
@@ -328,9 +329,7 @@ def show_set_grades() -> str:
     users = teacher.get_students(users_only=True)
     subjects = teacher.get_subjects()
     
-    return render_template("set_grades.html", # ... esta plantilla .html los necesita.
-                           usuarios = users,
-                           materias = subjects)
+    return render_template("set_grades.html", usuarios = users, materias = subjects)# ... esta plantilla .html los necesita.
 
 # Esta función muestra la página de la lista de los estudiantes
 @app.route('/list_of_students')
