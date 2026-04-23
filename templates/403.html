@@ -1,0 +1,16 @@
+<!--PLANTILLA PARA INDICAR QUE HUBO UN ERROR DE PETICIÓN HTTP 403-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR 403</title>
+</head>
+<body>
+    <h1>Upss...</h1>
+    <p>Primero necesitas iniciar sesión para esto. Te aconsejamos que vuelvas a la página principal.</p>
+    <br>
+    <a href="{{ url_for('show_loginmode_page') }}" >
+        <button>Ir a la página principal</button>
+    </a>
+</body>
+</html>
