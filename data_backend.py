@@ -112,7 +112,7 @@ class _User:
     
     def is_registered(self) -> bool:
         '''Retorna True si el usuario está registrado (por su `username`), False de lo contrario.'''
-        return self._username in self._database.get_data(table=f"{_User._table}", columns=["user_name"])
+        return self._username in self._database.get_data(table=f"{self._table}", columns=["user_name"])
 
     def get_id(self) -> int | None:
         '''Retorna el id del usuario, None si éste no existe.'''
@@ -121,7 +121,7 @@ class _User:
         
         connection = self._database.connection()
         cursor = connection.cursor()
-        cursor.execute(f"SELECT id FROM {_User._table} WHERE user_name = '{self._username}'")
+        cursor.execute(f"SELECT id FROM {self._table} WHERE user_name = '{self._username}'")
         _id = cursor.fetchall()[0][0]
         cursor.close()
         connection.close()
@@ -136,7 +136,7 @@ class _User:
         connection = self._database.connection()
         cursor = connection.cursor()
 
-        cursor.execute(f"SELECT name from {_User._table} WHERE user_name = '{self._username}'")
+        cursor.execute(f"SELECT name from {self._table} WHERE user_name = '{self._username}'")
 
         name = cursor.fetchall()[0][0]
 
@@ -154,7 +154,7 @@ class _User:
     
         cursor = connection.cursor()
 
-        cursor.execute(f"SELECT password FROM {_User._table} WHERE user_name = '{self._username}'")
+        cursor.execute(f"SELECT password FROM {self._table} WHERE user_name = '{self._username}'")
 
         password = cursor.fetchall()[0][0]
 
@@ -174,7 +174,7 @@ class Student(_User):
         El `username` es el nombre de usuario registrado.\n
         La `database` es la base de datos.'''
         super().__init__(username, database)
-        _User._table = "students"
+        self._table = "students"
 
     ### Ver sus materias y calificaciones
     def get_subjects(self, with_grades:bool = True) -> dict[str, float] | list[str] | None:
@@ -293,7 +293,7 @@ class Teacher(_User):
             El `username` es el nombre de usuario del maestro.\n
             La `database` es la base de datos.'''
         super().__init__(username, database)
-        _User._table = "teachers"
+        self._table = "teachers"
     
     ### Agregar alumnos
     def add_student(self, student:Student, subject:Subject) -> None:
