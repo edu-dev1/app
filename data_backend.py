@@ -367,11 +367,8 @@ class Teacher(_User):
 
         student_id = student.get_id()
         subject_id = subject.get_id()
-
-        if self.__grade_is_None(student, subject): #Modificar
-            cursor.execute(f"UPDATE student_subjects SET grade = {grade} WHERE student_id = {student_id} AND subject_id = {subject_id}")
-        else: #Asignar
-            cursor.execute(f"INSERT INTO student_subjects (grade) VALUES ({grade}) WHERE student_id = {student_id} AND subject_id = {subject_id}")
+        cursor.execute(f"UPDATE student_subjects SET grade = {grade} WHERE student_id = {student_id} AND subject_id = {subject_id}")
+        
         connection.commit()
         cursor.close()
         connection.close()
@@ -424,20 +421,6 @@ class Teacher(_User):
         return students
     
     ###  ---- Métodos útiles extra ---- ####
-    def __grade_is_None(self, student:Student, subject:Subject) -> bool: # Método privado
-        '''Retorna True si la calificación de la materia `subject` del estudiante `student` es None.'''
-
-        connection = self._database.connection()
-
-        cursor = connection.cursor()
-
-        cursor.execute(f"SELECT grade FROM student_subjects WHERE student_id = {student.get_id()} AND subject_id = {subject.get_id()}")
-        grade = cursor.fetchall()[0][0]
-        cursor.close()
-        connection.close()
-
-        return grade is None
-
     def get_subjects(self) -> str:
         '''Retorna las materias asignadas del maestro.'''
 
