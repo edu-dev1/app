@@ -1,0 +1,16 @@
+<!--PLANTILLA PARA INDICAR QUE HUBO UN ERROR: UN ESTUDIANTE QUISO VER UNA PÁGINA DE MAESTROS.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR</title>
+</head>
+<body>
+    <h1>Upss...</h1>
+    <p>No eres maestro....</p>
+    <br>
+    <a href="{{ url_for('show_student_menu') }}" >
+        <button>Ir al menú</button>
+    </a>
+</body>
+</html>

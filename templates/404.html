@@ -1,0 +1,16 @@
+<!--PLANTILLA PARA INDICAR QUE HUBO UN ERROR DE PETICIÓN HTTP 404-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR 404</title>
+</head>
+<body>
+    <h1>Upss...</h1>
+    <p>Ruta no encontrada.</p>
+    <br>
+    <a href="{{ url_for('show_loginmode_page') }}" >
+        <button>Ir a la página principal</button>
+    </a>
+</body>
+</html>

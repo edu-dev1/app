@@ -1,0 +1,18 @@
+<!--PLANTILLA PARA INDICAR QUE HUBO UN ERROR DE PETICIÓN HTTP 500-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ERROR 500</title>
+</head>
+<body>
+    <h1>Upss...</h1>
+    <p>Tu usuario y/o contraseña son incorrectos.</p>
+    <br>
+    <label>Vuelve a intenarlo: </label>
+    <a href="{{ url_for('show_loginmode_page') }}" >
+        
+        <button>Ir a la página principal</button>
+    </a>
+</body>
+</html>

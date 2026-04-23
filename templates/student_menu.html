@@ -1,0 +1,58 @@
+<!--PLANTILLA PARA MOSTRAR EL MENÚ DEL ESTUDIANTE-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Menú del Estudiante</title>
+        <!--<link rel="stylesheet" href="{{ url_for('static', filename='style_register.css') }}">-->
+
+        <!--CSS-->
+        <style>
+            body{
+                background-color: rgb(164, 159, 241);
+                text-align: center;
+            }
+            h1{
+                font-family: cursive;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1> Estudiante {{nombre}}, ¿Qué quieres consultar?</h1>
+        <!--Botón materias-->
+        <br>
+        <label>Materias y Calificaciones:</label>
+        <a href="{{ url_for('show_subjects_grades') }}">
+            <button>Ir</button>
+        </a>
+        <!--Botón promedio-->
+        <br>
+        <br>
+        <label>Promedio actual:</label>
+        <a href="{{ url_for('show_average') }}">
+            <button>Ir</button>
+        </a>
+        <!--Botón peores calificaiones-->
+        <br>
+        <br>
+        <label>Peor(es) Calificación(es):</label>
+        <a href="{{ url_for('show_worst_grades') }}">
+            <button>Ir</button>
+        </a>
+        <!--Botón estado actual-->
+        <br>
+        <br>
+        <label>Estado Actual:</label>
+        <a href="{{ url_for('show_status') }}">
+            <button>Ir</button>
+        </a>
+        <br>
+        <br>
+        <!--Botón de cerrar sesión-->
+        <label>Cerrar sesión:</label>
+        <a href="{{ url_for('logout') }}">
+            <button>Ir</button>
+        </a>
+    </body>
+</html>

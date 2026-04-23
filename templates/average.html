@@ -1,0 +1,64 @@
+<!--PLANTILLA PARA MOSTRAR EL PROMEDIO DEL ESTUDIANTE-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Promedio</title>
+
+        <style>
+            body{
+                background-color: rgb(72, 177, 104);
+                text-align: center;
+            }
+            h1{
+                font-family: cursive;
+            }
+            .button2{
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+                background: #ececec;
+            }
+            .card-promedio{
+                width: 250px;
+                margin: 30px auto;
+                padding: 20px;
+
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
+                text-align: center;
+            }
+
+            .card-promedio h2{
+                margin-bottom: 10px;
+                font-family: cursive;
+            }
+
+            .card-promedio p{
+                font-size: 40px;
+                font-weight: bold;
+                color: #007BFF;
+            }
+        </style>
+        <script>
+
+        </script>
+    </head>
+
+    <body>
+        <h1>Promedio</h1>
+        <div class="card-promedio">
+            <p>{{ promedio }}</p>
+        </div>
+        <br>
+        <a href="{{ url_for('show_student_menu') }}">
+            <button class = "button button2">Volver al menú</button>
+        </a>
+        
+    </body>
+</html>

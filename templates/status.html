@@ -1,0 +1,60 @@
+<!--PLANTILLA PARA MOSTRAR EL ESTADO DEL ESTUDIANTE-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Estado</title>
+
+        <style>
+            body{
+                background-color: rgb(72, 177, 104);
+                text-align: center;
+            }
+            h1{
+                font-family: cursive;
+            }
+            .card-estado{
+                width: 250px;
+                margin: 30px auto;
+                padding: 20px;
+
+                background: white;
+                border-radius: 15px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
+                text-align: center;
+            }
+
+            .card-estado p{
+                font-size: 40px;
+                font-weight: bold;
+                color: #007BFF;
+            }
+
+            .button{
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+                background: #ececec;
+            }
+        </style>
+        <script>
+
+        </script>
+    </head>
+
+    <body>
+        <h1>Estado</h1>
+        <div class="card-estado">
+            <p>{{ estado }}</p>
+        </div>
+        <br>
+        <a href="{{ url_for('show_student_menu') }}">
+            <button class = "button">Volver al menú</button>
+        </a>
+        
+    </body>
+</html>

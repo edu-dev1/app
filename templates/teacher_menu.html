@@ -1,0 +1,68 @@
+<!--PLANTILLA PARA MOSTRAR EL MENÚ DEL MAESTRO-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Menú del Maestro</title>
+        <!--<link rel="stylesheet" href="{{ url_for('static', filename='style_register.css') }}">-->
+
+        <!--CSS-->
+        <style>
+            body{
+                background-color: rgb(164, 159, 241);
+                text-align: center;
+            }
+            h1{
+                font-family: cursive;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1> Maestro {{nombre}}, ¿Qué desea hacer?</h1>
+        <!--Botón agregar alumno-->
+        <br>
+        <label>Agregar alumno:</label>
+        <a href="{{ url_for('show_add_student') }}">
+            <button>Ir</button>
+        </a>
+
+        <!--Botón organizar alumno-->
+        <br>
+        <br>
+        <label>Organizar alumno:</label>
+        <a href="{{ url_for('show_organize_student') }}">
+            <button>Ir</button>
+        </a>
+        
+        <!--Botón registrar materias-->
+        <br>
+        <br>
+        <label>Registrar materias:</label>
+        <a href="{{ url_for('show_regs_subjects') }}">
+            <button>Ir</button>
+        </a>
+        <br>
+        <br>
+        <!--Botón de asignar o modificar calificaciones-->
+        <label>Asignar calificaciones:</label>
+        <a href="{{ url_for('show_set_grades') }}">
+            <button>Ir</button>
+        </a>
+        <br>
+        <br>
+        <!--Botón de asignar o modificar calificaciones-->
+        <label>Consultar listados de alumnos:</label>
+        <a href="{{ url_for('show_students') }}">
+            <button>Ir</button>
+        </a>
+        <br>
+        <br>
+        <!--Botón de cerrar sesión-->
+        <label>Cerrar sesión:</label>
+        <a href="{{ url_for('logout') }}">
+            <button>Ir</button>
+        </a>
+        
+    </body>
+</html>

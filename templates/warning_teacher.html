@@ -1,0 +1,16 @@
+<!--PLANTILLA PARA AVISAR QUE UN MAESTRO YA TIENE ASIGNADA UNA MATERIA-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AVISO</title>
+</head>
+<body>
+    <h1>AVISO...</h1>
+    <p>La materia {{materia}} ya tiene asignada un maestro.</p>
+    <br>
+    <a href="{{ url_for('show_regs_subjects') }}" >
+        <button>Volver</button>
+    </a>
+</body>
+</html>

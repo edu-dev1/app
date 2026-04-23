@@ -1,0 +1,183 @@
+<!--PLANTILLA PARA MOSTRAR LOS RECURSOS PARA ORGANIZAR UN ESTUDIANTE-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Organizar Estudiante</title>
+
+        <style>
+            body{
+                background-color: rgb(54, 46, 168);
+                text-align: center;
+                font-size: 16px;
+            }
+            h1{
+                font-family: cursive;
+                text-align: center;
+            }
+            h2{
+                font-family: cursive;
+                text-align: center;
+            }
+            /* Contenedor del formulario */
+            .formulario {
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                width: 300px;
+                flex-direction: column;
+                display: block;
+                height: 150px;
+                margin: auto;
+            }
+
+            /* Labels */
+            .formulario label {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            /* Inputs */
+            .formulario input {
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                outline: none;
+                transition: 0.3s;
+            }
+
+            /* Efecto al hacer click */
+            .formulario input:focus {
+                border-color: #007BFF;
+                box-shadow: 0 0 5px rgba(0,123,255,0.3);
+            }
+
+            /* Botones */
+            .formulario button {
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+                background: #007BFF;
+                color: white;
+            }
+
+            .button2{
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+                background: #ececec;
+            }
+
+            /* Hover botón */
+            .formulario button:hover {
+                background: #0056b3;
+            }
+
+            .tabla{
+                width: 60%;
+                margin: 30px auto;
+                border-collapse: collapse;
+                font-family: Arial, sans-serif;
+                background: white;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            }
+
+            /* Encabezado */
+            .tabla thead{
+                background: #007BFF;
+                color: white;
+            }
+
+            .tabla th{
+                padding: 12px;
+                text-align: center;
+            }
+
+            /* Celdas */
+            .tabla td{
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            /* Filas alternadas */
+            .tabla tbody tr:nth-child(even){
+                background: #f2f2f2;
+            }
+
+            /* Hover */
+            .tabla tbody tr:hover{
+                background: #d6eaff;
+                transition: 0.2s;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Organizar estudiantes</h1>
+        <h2>Información de los alumnos</h2>
+        <table class = "tabla" border="1", align="center">
+            <tr>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Materia</th>
+                <th>Carrera</th>
+                <th>Grupo</th>
+            </tr>
+
+            {% for name, user_name, materia, carrera, group in estudiantes %}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ user_name }}</td>
+                <td>{{ materia }}</td>
+                <td>{{ carrera }}</td>
+                <td>{{ group }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <!--Coment-->
+        <form method = "POST" class = "formulario">
+            <label>Usuario</label>
+
+            <select name="usuario" required>
+                <option value="" disabled selected>Selecciona un estudiante</option>
+
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario }}">{{ usuario }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <br>
+            <label>Carrera</label>
+            <select name="carrera" required>
+                <option value="" disabled selected>Selecciona una carrera</option>
+
+                {% for carrera in carreras %}
+                    <option value="{{ carrera }}">{{ carrera }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <br>
+            <label>Grupo</label>
+            <input maxlength="1" type="text" name="grupo" placeholder="A" oninput="this.value = this.value.replace(/[^a-zA-Z]/g, '').toUpperCase()">
+            <br>
+            <button type="submit">Agregar</button>
+        </form>        
+        <br>
+        <a href="{{ url_for('show_teacher_menu') }}" >
+            <button class="button button2">Volver al menú</button>
+        </a>
+    </body>
+    
+</html>

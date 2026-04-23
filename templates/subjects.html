@@ -1,0 +1,92 @@
+<!--PLANTILLA PARA MOSTRAR LAS MATERIA DEL ESTUDIANTE-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Materias</title>
+
+        <style>
+            body{
+                background-color: rgb(182, 172, 172);
+                text-align: center;
+            }
+            h1{
+                font-family: cursive;
+            }
+            .tabla{
+                width: 60%;
+                margin: 30px auto;
+                border-collapse: collapse;
+                font-family: Arial, sans-serif;
+                background: white;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            }
+
+            /* Encabezado */
+            .tabla thead{
+                background: #007BFF;
+                color: white;
+            }
+
+            .tabla th{
+                padding: 12px;
+                text-align: center;
+            }
+
+            /* Celdas */
+            .tabla td{
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            /* Filas alternadas */
+            .tabla tbody tr:nth-child(even){
+                background: #f2f2f2;
+            }
+
+            /* Hover */
+            .tabla tbody tr:hover{
+                background: #d6eaff;
+                transition: 0.2s;
+            }
+            .button{
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+                background: #ececec;
+            }
+        </style>
+        <script>
+
+        </script>
+    </head>
+
+    <body>
+        <h1>Materias</h1>
+        <table class = "tabla" border="1", align="center">
+            <tr>
+                
+                <th>Materia</th>
+                <th>Calificación</th>
+            </tr>
+
+            {% for materia, calificación in materias.items() %}
+            <tr>
+                <td>{{ materia }}</td>
+                <td>{{ calificación }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="{{ url_for('show_student_menu') }}">
+            <button class = "button">Volver al menú</button>
+        </a>
+        
+    </body>
+</html>

@@ -1,0 +1,94 @@
+<!--PLANTILLA PARA INICIAR SESIÓN-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Iniciar Sesión</title>
+
+        <style>
+            body{
+                background-color: rgb(54, 46, 168);
+                text-align: center;
+                font-size: 16px;
+            }
+            h1{
+                font-family: cursive;
+                text-align: center;
+            }
+            h2{
+                font-family: cursive;
+                text-align: center;
+            }
+            /* Contenedor del formulario */
+            .formulario {
+                background: white;
+                padding: 35px;
+                border-radius: 12px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                width: 300px;
+                display: block;
+                flex-direction: column;
+                margin: auto;
+            }
+
+            /* Labels */
+            .formulario label {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            /* Inputs */
+            .formulario input {
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                outline: none;
+                transition: 0.3s;
+            }
+
+            /* Efecto al hacer click */
+            .formulario input:focus {
+                border-color: #007BFF;
+                box-shadow: 0 0 5px rgba(0,123,255,0.3);
+            }
+
+            /* Botones */
+            button {
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+                background: #007BFF;
+                color: white;
+            }
+
+            /* Hover botón */
+            .formulario button:hover {
+                background: #0056b3;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1>APP</h1>
+        <p>Inicia sesión</p>
+        <br>
+    
+        <!--Coment-->
+        <form method = "POST" class = "formulario">
+            <label>Usuario</label>
+            <input type="user" name="usuario" placeholder="my_user"><br><br>
+            <label>Contraseña</label>
+            <input type="password" name="contraseña" placeholder="*********" id="passInp"/>
+            <input type = "checkbox" onclick="passInp.type = this.checked ? 'text' : 'password'">
+            <button type="submit">ENTRAR</button>
+            <br>
+        </form>        
+        <br>
+    </body>
+    
+</html>

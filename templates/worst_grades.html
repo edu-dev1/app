@@ -1,0 +1,91 @@
+<!--PLANTILLA PARA MOSTRAR LAS PEORES CALIFICAIONES DEL ESTUDIANTE-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Peores Calificaciones</title>
+
+        <style>
+            body{
+                background-color: rgb(45, 172, 77);
+                text-align: center;
+            }
+            h1{
+                font-family: cursive;
+            }
+
+            .tabla{
+                width: 60%;
+                margin: 30px auto;
+                border-collapse: collapse;
+                font-family: Arial, sans-serif;
+                background: white;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            }
+
+            /* Encabezado */
+            .tabla thead{
+                background: #007BFF;
+                color: white;
+            }
+
+            .tabla th{
+                padding: 12px;
+                text-align: center;
+            }
+
+            /* Celdas */
+            .tabla td{
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+
+            /* Filas alternadas */
+            .tabla tbody tr:nth-child(even){
+                background: #f2f2f2;
+            }
+
+            /* Hover */
+            .tabla tbody tr:hover{
+                background: #d6eaff;
+                transition: 0.2s;
+            }
+            .button2{
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+                background: #ececec;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Materias con Peor Calificación</h1>
+        <table class = "tabla" border="1" align="center">
+            <tr>
+                
+                <th>Materia</th>
+                <th>Calificación</th>
+            </tr>
+
+            {% for sub, gr in datos.items() %}
+            <tr>
+                <td>{{ sub }}</td>
+                <td>{{ gr }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <a href="{{ url_for('show_student_menu') }}">
+            <button class = "button button2">Volver al menú</button>
+        </a>
+        
+    </body>
+</html>
