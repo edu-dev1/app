@@ -202,12 +202,12 @@ def show_add_student() -> str:
         subject = Subject(name_subject, db)
 
         subject_name = subject.get_name()
-        student_subjects = student.get_subjects(with_grades=False)
+        student_user = student.get_user_name()
 
-        if subject_name in student_subjects: #Si el alumno ya está en la materia...
+        if student.assigned_subject_yet(subject): #Si el alumno ya está en la materia...
             
             return render_template("warning_student.html",
-                            usuario = student.get_user_name(),
+                            usuario = student_user,
                             materia = subject_name) # ... muestra esta plantilla de aviso
             
         else:
