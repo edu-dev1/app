@@ -64,7 +64,9 @@
                 background: #007BFF;
                 color: white;
             }
-
+            .back{
+                background-color: red;
+            }
             /* Hover botón */
             .formulario button:hover {
                 background: #0056b3;
@@ -87,8 +89,12 @@
             <input type = "checkbox" onclick="passInp.type = this.checked ? 'text' : 'password'">
             <button type="submit">ENTRAR</button>
             <br>
-        </form>        
+        </form>
+        <!--Botón de cerrar sesión-->
+        <br>
+        <a href="{{ url_for('show_loginmode_page') }}">
+            <button class = "button back">VOLVER</button>
+        </a>       
         <br>
     </body>
-    
 </html>
