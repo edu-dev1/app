@@ -88,10 +88,14 @@ def show_student_menu() -> str:
     if "user" not in session: # Si no han iniciado sesión no puede ver esta página y ...
         abort(403) # llama a este código de petición de petición
 
-    student = Student(session["user"], db) # Crea el objeto estudiante con el usuario de la sesión iniciada
+    if not session["mode"] == "student": # Si no es estudiante...
+        return render_template("error_student.html") # ... muestra plantilla de error.
     
-    name = student.get_name() # Obtiene el nombre del estudiante porque...
-    return render_template("student_menu.html", nombre = name) # esta plantilla .html lo necesita
+    student = Student(session["user"], db) # Crea el objeto estudiante con el usuario de la sesión iniciada
+    # Obtiene toda la información y la carrera del estudiante porque...
+    data = student.get_info(columns=["name", "age", "user_name", "semester", "_group"])
+    career = student.get_career()
+    return render_template("student_menu.html", info = data, carrera = career) #... esta plantilla .html lo necesita
 
 @app.route('/teacher_menu') # Este método decorador "route" es para nombrar la ruta o url de la página que mostrará esta función
 def show_teacher_menu() -> str:
@@ -103,8 +107,8 @@ def show_teacher_menu() -> str:
     
     teacher = Teacher(session["user"], db) # Crea el objeto maestro con el usuario de la sesión iniciada
     
-    name = teacher.get_name() # Obtiene el nombre del maestro porque...
-    return render_template("teacher_menu.html", nombre = name) # esta plantilla .html lo necesita
+    data = teacher.get_info(["name", "age", "user_name",]) # Obtiene el nombre del maestro porque...
+    return render_template("teacher_menu.html", info = data) # esta plantilla .html lo necesita
 
 # ---------------------------------------------------- #
 ### CERRAR SESIÓN ###
@@ -247,7 +251,7 @@ def show_organize_student() -> str:
         if not career: # Si no eligieron una carrera...
             career = student.get_career() # ... la carrera sigue siendo la misma
         if not group: # Si no eligieron un grupo ...
-            group = student.get_group() # ... el grupo sigue siendo el mismo porque...
+            group = student.get_info("_group") # ... el grupo sigue siendo el mismo porque...
 
         teacher.set_group(student, group, career) # ... este método se ejecuta siempre.
         
