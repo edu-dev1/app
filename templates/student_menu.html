@@ -15,11 +15,23 @@
             h1{
                 font-family: cursive;
             }
+            .list{
+                text-align: left;
+            }
         </style>
     </head>
 
     <body>
-        <h1> Estudiante {{nombre}}, ¿Qué quieres consultar?</h1>
+        <h1> ¿Qué quieres consultar?</h1>
+        <!--Lista-->
+        <ul class="list">
+            <li>Nombre: {{ info[0][0] }}</li>
+            <li>Edad: {{ info[0][1] }}</li>
+            <li>Usuario: {{ info[0][2] }}</li>
+            <li>Carrera: {{ carrera }}</li>
+            <li>Semestre: {{ info[0][3] }}</li>
+            <li>Grupo: {{ info[0][4] }}</li>
+        </ul>
         <!--Botón materias-->
         <br>
         <label>Materias y Calificaciones:</label>
