@@ -4,8 +4,6 @@
     <head>
         <meta charset="UTF-8">
         <title>Menú del Maestro</title>
-        <!--<link rel="stylesheet" href="{{ url_for('static', filename='style_register.css') }}">-->
-
         <!--CSS-->
         <style>
             body{
@@ -13,10 +11,32 @@
                 text-align: center;
             }
             h1{
-                font-family: cursive;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            h2{
+                text-align: left;
+                font-size: medium;
+                font-family: Arial, Helvetica, sans-serif;
             }
             .list{
                 text-align: left;
+            }
+            .button{
+                color: white;
+                font-size: 11px;
+                margin: 2px;
+                cursor: pointer;
+                font-family: "Consolas";
+                width: 30px;
+                background-color: rgb(0, 100, 100);
+            }
+            .bc{
+                background-color: rgb(150, 0, 0);
+                width: 55px;
+                height: 23px;
+            }
+            label{
+                font-family: 'Courier New', Courier, monospace;
             }
         </style>
     </head>
@@ -24,6 +44,7 @@
     <body>
         <h1> ¿Qué desea hacer?</h1>
         <!--Lista-->
+        <h2>MAESTRO</h2>
         <ul class="list">
             <li>Nombre: {{ info[0][0] }}</li>
             <li>Edad: {{ info[0][1] }}</li>
@@ -31,10 +52,9 @@
         </ul>
         <br>
         <!--Botón agregar alumno-->
-        <br>
         <label>Agregar alumno:</label>
         <a href="{{ url_for('show_add_student') }}">
-            <button>Ir</button>
+            <button class="button">Ir</button>
         </a>
 
         <!--Botón organizar alumno-->
@@ -42,7 +62,7 @@
         <br>
         <label>Organizar alumno:</label>
         <a href="{{ url_for('show_organize_student') }}">
-            <button>Ir</button>
+            <button class="button">Ir</button>
         </a>
         
         <!--Botón registrar materias-->
@@ -50,29 +70,28 @@
         <br>
         <label>Registrar materias:</label>
         <a href="{{ url_for('show_regs_subjects') }}">
-            <button>Ir</button>
+            <button class="button">Ir</button>
         </a>
         <br>
         <br>
         <!--Botón de asignar o modificar calificaciones-->
         <label>Asignar calificaciones:</label>
         <a href="{{ url_for('show_set_grades') }}">
-            <button>Ir</button>
+            <button class="button">Ir</button>
         </a>
         <br>
         <br>
         <!--Botón de asignar o modificar calificaciones-->
         <label>Consultar listados de alumnos:</label>
         <a href="{{ url_for('show_students') }}">
-            <button>Ir</button>
+            <button class="button">Ir</button>
         </a>
         <br>
         <br>
         <!--Botón de cerrar sesión-->
         <label>Cerrar sesión:</label>
         <a href="{{ url_for('logout') }}">
-            <button>Ir</button>
+            <button class="button bc">Cerrar</button>
         </a>
-        
     </body>
 </html>
