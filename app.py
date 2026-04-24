@@ -63,7 +63,7 @@ def show_login_page() -> Response | str:
     if "mode" not in session: #Si no han elegido el modo de inicio de sesión...
         abort(403) # ... llama al código de petición de HTTP número 403
     
-    return render_template("login.html") # Muestra este .html cuando la petición o método es GET (siempre)
+    return render_template("login.html", modo = "MAESTRO" if mode == "teacher" else "ESTUDIANTE") # Muestra este .html cuando la petición o método es GET (siempre)
 
 # ---------------------------------------------------- #
 ### --- MANEJO DE ERRORES (CÓDIGOS DE PETICIONES DE HTTP) --- ###
