@@ -147,7 +147,7 @@ class _User:
     
     def get_password(self) -> str | None:
         '''
-        #### AVISO: DESEMCRIPTACIÓN ####
+        #### AVISO: DESENCRIPTACIÓN ####
         Retorna la contraseña desemcriptada del usuario , si éste no existe retorna None.'''
         if not self.is_registered():
             return None
