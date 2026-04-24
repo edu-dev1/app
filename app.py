@@ -6,7 +6,8 @@ from data_backend import DataBase, Student, Subject, Teacher
 # Crear el objeto principal de Flask, la aplicación con el nombre "__main__" (__name__)
 app = Flask(__name__)
 # Una clave secreta (no compartir) para proteger datos al usar sesiones y cookies
-app.secret_key = ""
+with open("secret_key.txt", 'r') as sk:
+    app.secret_key = sk.read()
 # Crear el objeto de la base de datos
 db = DataBase(host="my_host", user="my_user", password="my_password", database="my_db") 
 # ---------------------------------------------------- #
