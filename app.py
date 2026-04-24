@@ -253,7 +253,7 @@ def show_organize_student() -> str:
         if not group: # Si no eligieron un grupo ...
             group = student.get_info("_group") # ... el grupo sigue siendo el mismo porque...
 
-        teacher.set_group(student, group, career) # ... este método se ejecuta siempre.
+        teacher.set_group_career(student, group, career) # ... este método se ejecuta siempre.
         
         return redirect(url_for("show_organize_student")) # Redirige a esta misma función para que muestre otra vez la página
 
