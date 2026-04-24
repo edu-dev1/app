@@ -206,6 +206,7 @@ class _User:
 
         return info
         
+### ---------------------------------------- ###
 class Student(_User):
     '''Una clase para el estudiante.'''
     def __init__(self, username:str, database:DataBase) -> None:
@@ -309,6 +310,7 @@ class Student(_User):
         
         return subject.get_name() in self.get_subjects(with_grades=False)
 
+### ---------------------------------------- ###
 class Teacher(_User):
     '''Una clase para el maestro.'''
     def __init__(self, username:str, database:DataBase):
@@ -345,8 +347,8 @@ class Teacher(_User):
         return None
     
     ### Organizar alumnos
-    def set_group(self, student:Student, group:str, career:str) -> None:
-        '''Asigna el grupo `group` al estudiante `student` .'''
+    def set_group_career(self, student:Student, group:str, career:str) -> None:
+        '''Asigna el grupo `group` y la carrera `career` al estudiante `student` .'''
         if not student.is_registered() or not group.isalpha() or len(group) > 1:
             raise ValueError("Estudiante no registrado y/o el grupo no es válido.")
         
@@ -354,7 +356,9 @@ class Teacher(_User):
         cursor = connection.cursor()
 
         student_id = student.get_id()
-        cursor.execute(f"UPDATE students SET _group = '{group}', career = '{career}' WHERE id = {student_id}")
+        cursor.execute(f"SELECT id FROM careers WHERE name = '{career}'")
+        career_id = cursor.fetchall()[0][0]
+        cursor.execute(f"UPDATE students SET _group = '{group}', career_id = '{career_id}' WHERE id = {student_id}")
         
         connection.commit()
         cursor.close()
