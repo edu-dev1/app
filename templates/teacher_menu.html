@@ -15,11 +15,21 @@
             h1{
                 font-family: cursive;
             }
+            .list{
+                text-align: left;
+            }
         </style>
     </head>
 
     <body>
-        <h1> Maestro {{nombre}}, ¿Qué desea hacer?</h1>
+        <h1> ¿Qué desea hacer?</h1>
+        <!--Lista-->
+        <ul class="list">
+            <li>Nombre: {{ info[0][0] }}</li>
+            <li>Edad: {{ info[0][1] }}</li>
+            <li>Usuario: {{ info[0][2] }}</li>
+        </ul>
+        <br>
         <!--Botón agregar alumno-->
         <br>
         <label>Agregar alumno:</label>
