@@ -4,8 +4,6 @@
     <head>
         <meta charset="UTF-8">
         <title>Modo</title>
-        <!--<link rel="stylesheet" href="{{ url_for('static', filename='style_register.css') }}">-->
-
         <!--CSS-->
         <style>
             body{
@@ -14,34 +12,37 @@
                 font-size: 16px;
             }
             h1{
-                font-family: cursive;
+                font-family: Arial, Helvetica, sans-serif;
             }
             .button{
-                border: none;
                 color: white;
                 padding: 15px 20px;
                 font-size: 16px;
                 margin: 4px;
                 cursor: pointer;
-                font-family: "Consolas";
+                font-family:Arial, Helvetica, sans-serif;
+                width: 150px;
+                background-color: rgb(15, 100, 100);
             }
 
-            .button1 {background-color: #008CBA;}
-            .button2 {background-color: #03c50d;}
+            label{
+                font-family:Arial, Helvetica, sans-serif;
+                font-size: 15px;
+            }
         </style>
     </head>
 
     <body>
         <h1> ¿Eres maestro o estudiante?</h1>
-        
         <br>
-        <p>Elige tu modo de inicio de sesión:</p>
-
+        <label>Elige tu modo de inicio de sesión:</label>
+        <br>
+        <br>
         <form method="POST" class = "formulario">
             <!--Botón maestro-->
-            <button class = "button button1" type = "submit" value = "teacher" name = "mode">MAESTRO</button>
+            <button class = "button" type = "submit" value = "teacher" name = "mode">MAESTRO</button>
             <!--Botón estudiante-->
-            <button class = "button button2" type = "submit" value = "student" name = "mode">ESTUDIANTE</button>
+            <button class = "button" type = "submit" value = "student" name = "mode">ESTUDIANTE</button>
         </form> 
     </body>
 </html>
