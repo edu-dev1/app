@@ -146,22 +146,24 @@ class _User:
         return name
     
     def get_password(self) -> str | None:
-        '''Retorna la contraseña del usuario, si éste no existe retorna None.'''
+        '''
+        #### AVISO: DESEMCRIPTACIÓN ####
+        Retorna la contraseña desemcriptada del usuario , si éste no existe retorna None.'''
         if not self.is_registered():
             return None
         
         connection = self._database.connection()
     
         cursor = connection.cursor()
-
-        cursor.execute(f"SELECT password FROM {self._table} WHERE user_name = '{self._username}'")
-
-        password = cursor.fetchall()[0][0]
+        cursor.execute(f"""SELECT CONVERT(AES_DECRYPT(password, 'your_key')
+                       USING UTF8) AS pd FROM {self._table} 
+                       WHERE user_name = '{self._username}'""")
+        decrypted_password = cursor.fetchall()[0][0]
 
         cursor.close()
         connection.close()
         
-        return password
+        return decrypted_password
     
     def get_user_name(self) -> str | None:
         '''Retorna el `user_name` del usuario, None si éste no está registrado.'''
