@@ -4,8 +4,6 @@
     <head>
         <meta charset="UTF-8">
         <title>Menú del Estudiante</title>
-        <!--<link rel="stylesheet" href="{{ url_for('static', filename='style_register.css') }}">-->
-
         <!--CSS-->
         <style>
             body{
@@ -13,16 +11,39 @@
                 text-align: center;
             }
             h1{
-                font-family: cursive;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            h2{
+                text-align: left;
+                font-size: medium;
+                font-family: Arial, Helvetica, sans-serif;
             }
             .list{
                 text-align: left;
+            }
+            .button{
+                color: white;
+                font-size: 11px;
+                margin: 2px;
+                cursor: pointer;
+                font-family: "Consolas";
+                width: 30px;
+                background-color: rgb(0, 100, 100);
+            }
+            .bc{
+                background-color: rgb(150, 0, 0);
+                width: 55px;
+                height: 23px;
+            }
+            label{
+                font-family: 'Courier New', Courier, monospace;
             }
         </style>
     </head>
 
     <body>
         <h1> ¿Qué quieres consultar?</h1>
+        <h2>ESTUDIANTE</h2>
         <!--Lista-->
         <ul class="list">
             <li>Nombre: {{ info[0][0] }}</li>
@@ -36,35 +57,35 @@
         <br>
         <label>Materias y Calificaciones:</label>
         <a href="{{ url_for('show_subjects_grades') }}">
-            <button>Ir</button>
+            <button class = "button">Ir</button>
         </a>
         <!--Botón promedio-->
         <br>
         <br>
         <label>Promedio actual:</label>
         <a href="{{ url_for('show_average') }}">
-            <button>Ir</button>
+            <button class = "button">Ir</button>
         </a>
         <!--Botón peores calificaiones-->
         <br>
         <br>
         <label>Peor(es) Calificación(es):</label>
         <a href="{{ url_for('show_worst_grades') }}">
-            <button>Ir</button>
+            <button class = "button">Ir</button>
         </a>
         <!--Botón estado actual-->
         <br>
         <br>
         <label>Estado Actual:</label>
         <a href="{{ url_for('show_status') }}">
-            <button>Ir</button>
+            <button class = "button">Ir</button>
         </a>
         <br>
         <br>
         <!--Botón de cerrar sesión-->
         <label>Cerrar sesión:</label>
         <a href="{{ url_for('logout') }}">
-            <button>Ir</button>
+            <button class = "button bc">Cerrar</button>
         </a>
     </body>
 </html>
