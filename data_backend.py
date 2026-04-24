@@ -103,18 +103,22 @@ class _User:
     '''Clase padre de las clases hijas `Student` y `Teacher`.'''
     _table:str
     _available_columns:list
-
+    _isregistered = False
+    
     def __init__(self, username:str, database:DataBase) -> None:
         '''Constructor de _User.\n
         El `username` es el nombre de usuario registrado.\n
         La `database` es la base de datos.'''
         self._username = username
         self._database = database
-    
-    def is_registered(self) -> bool:
+       
+    def _is_registered(self) -> bool:
         '''Retorna True si el usuario está registrado (por su `username`), False de lo contrario.'''
         return self._username in self._database.get_data(table=f"{self._table}", columns=["user_name"])
 
+    def is_registered(self) -> bool:
+        '''Retorna True si el usuario está registrado (por su `username`), False de lo contrario.'''
+        return self._isregistered
     def get_id(self) -> int | None:
         '''Retorna el id del usuario, None si éste no existe.'''
         if not self.is_registered():
@@ -211,6 +215,7 @@ class Student(_User):
         super().__init__(username, database)
         self._table = "students"
         self._available_columns = ["name", "age", "user_name", "semester", "_group"]
+        self._isregistered = self._is_registered()
 
     ### Ver sus materias y calificaciones
     def get_subjects(self, with_grades:bool = True) -> dict[str, float] | list[str] | None:
@@ -313,6 +318,7 @@ class Teacher(_User):
         super().__init__(username, database)
         self._table = "teachers"
         self._available_columns = ["name", "age", "user_name"]
+        self._isregistered = self._is_registered()
     
     ### Agregar alumnos
     def add_student(self, student:Student, subject:Subject) -> None:
