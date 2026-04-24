@@ -97,11 +97,12 @@ class Subject:
         connection.close()
 
         return has_teacher_yet
+        
 ### ---------------------------------------- ###
-
 class _User:
     '''Clase padre de las clases hijas `Student` y `Teacher`.'''
     _table:str
+    _available_columns:list
 
     def __init__(self, username:str, database:DataBase) -> None:
         '''Constructor de _User.\n
@@ -147,15 +148,15 @@ class _User:
     
     def get_password(self) -> str | None:
         '''
-        #### AVISO: DESENCRIPTACIÓN ####
-        Retorna la contraseña desemcriptada del usuario , si éste no existe retorna None.'''
+        #### AVISO: ¡DESENCRIPTACIÓN! ####
+        Retorna la contraseña desencriptada del usuario , si éste no existe retorna None.'''
         if not self.is_registered():
             return None
         
         connection = self._database.connection()
     
         cursor = connection.cursor()
-        cursor.execute(f"""SELECT CONVERT(AES_DECRYPT(password, 'your_key')
+        cursor.execute(f"""SELECT CONVERT(AES_DECRYPT(password, 'my_key')
                        USING UTF8) AS pd FROM {self._table} 
                        WHERE user_name = '{self._username}'""")
         decrypted_password = cursor.fetchall()[0][0]
@@ -168,7 +169,39 @@ class _User:
     def get_user_name(self) -> str | None:
         '''Retorna el `user_name` del usuario, None si éste no está registrado.'''
         return self._username if self.is_registered() else None
+    
+    def get_info(self, columns:list[str]|str) -> list|str|int|None:
+        '''Retorna un dato o datos de las columnas específicas sobre el usuario.\n
+        None si el usuario no está registrado.'''
+        if not self.is_registered():
+            return None
+        
+        if isinstance(columns, list):
+            if any(col not in self._available_columns for col in columns):
+                raise ValueError(f"Columna(s) no encontrada(s).")
+        elif isinstance(columns, str):
+            if columns not in self._available_columns:
+                raise ValueError(f"Columna(s) no encontrada(s).")
+        
+        connection = self._database.connection()
+        cursor = connection.cursor()
 
+        user_id = self.get_id()
+        if isinstance(columns, list):
+            cursor.execute(f"SELECT {", ".join(columns)} FROM {self._table} WHERE id = {user_id}")
+            if len(columns) > 1:
+                info = cursor.fetchall()
+            else:
+                info = cursor.fetchall()[0][0]
+        else:
+            cursor.execute(f"SELECT {columns} FROM students WHERE id = {user_id}")
+            info = cursor.fetchall()[0][0]
+    
+        cursor.close()
+        connection.close() 
+
+        return info
+        
 class Student(_User):
     '''Una clase para el estudiante.'''
     def __init__(self, username:str, database:DataBase) -> None:
@@ -177,6 +210,7 @@ class Student(_User):
         La `database` es la base de datos.'''
         super().__init__(username, database)
         self._table = "students"
+        self._available_columns = ["name", "age", "user_name", "semester", "_group"]
 
     ### Ver sus materias y calificaciones
     def get_subjects(self, with_grades:bool = True) -> dict[str, float] | list[str] | None:
@@ -261,24 +295,6 @@ class Student(_User):
 
         return career
     
-    def get_group(self) -> str:
-        '''Retorna el grupo del estudiante, None si el estudiante no está registrado.'''
-        if not self.is_registered():
-            return None
-        
-        connection = self._database.connection()
-        cursor = connection.cursor()
-
-        student_id = self.get_id()
-        cursor.execute(f"SELECT _group FROM students WHERE id = {student_id}")
-
-        group = cursor.fetchall()[0][0]
-
-        cursor.close()
-        connection.close()
-
-        return group
-    
     def assigned_subject_yet(self, subject:Subject) -> bool | None:
         '''Retorna True si la el estudiante ya está asignado a esta materia.\n
         None si el estudiante no está registrado'''
@@ -296,6 +312,7 @@ class Teacher(_User):
             La `database` es la base de datos.'''
         super().__init__(username, database)
         self._table = "teachers"
+        self._available_columns = ["name", "age", "user_name"]
     
     ### Agregar alumnos
     def add_student(self, student:Student, subject:Subject) -> None:
@@ -422,7 +439,7 @@ class Teacher(_User):
         
         return students
     
-    ###  ---- Métodos útiles extra ---- ####
+    ###  ---- Método útil extra ---- ####
     def get_subjects(self) -> str:
         '''Retorna las materias asignadas del maestro.'''
 
